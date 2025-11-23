@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reese Briar - Romance Author</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2d3436;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Decorative Elements */
+        .snowflake {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.5em;
+            animation: fall 10s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0f4c3a 0%, #2d5d4f 50%, #4a7c59 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="50" fill="rgba(255,255,255,0.1)">❄</text></svg>') repeat;
+            opacity: 0.3;
+            animation: snow 20s linear infinite;
+        }
+
+        @keyframes snow {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        header h1 {
+            font-size: 4em;
+            margin-bottom: 15px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.4em;
+            font-style: italic;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-tagline {
+            margin-top: 20px;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid #2d5d4f;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #0f4c3a;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background: #e8f5e9;
+            color: #2d5d4f;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 3px solid #4a7c59;
+        }
+
+        .hero-banner h2 {
+            font-size: 2.5em;
+            color: #0f4c3a;
+            margin-bottom: 20px;
+        }
+
+        .hero-banner p {
+            font-size: 1.3em;
+            color: #2d5d4f;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #0f4c3a;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        section h2::after {
+            content: '❄ ❄ ❄';
+            display: block;
+            font-size: 0.4em;
+            color: #4a7c59;
+            margin-top: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 50px;
+        }
+
+        /* Books Section */
+        #books {
+            background: white;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .book-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(15, 76, 58, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border: 2px solid #c8e6c9;
+        }
+
+        .book-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(15, 76, 58, 0.25);
+        }
+
+        .book-cover {
+            width: 100%;
+            max-width: 250px;
+            height: 375px;
+            background: linear-gradient(135deg, #2d5d4f 0%, #4a7c59 100%);
+            border-radius: 12px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border: 3px solid #0f4c3a;
+        }
+
+        .book-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #d32f2f;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .book-card h3 {
+            font-size: 1.7em;
+            margin: 20px 0 10px;
+            color: #0f4c3a;
+        }
+
+        .book-card .series-info {
+            font-style: italic;
+            color: #4a7c59;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .book-card p {
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.9;
+            font-size: 1.05em;
+        }
+
+        .amazon-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+        }
+
+        .amazon-button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 25px rgba(211, 47, 47, 0.5);
+            background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+        }
+
+        /* Newsletter Section */
+        #newsletter {
+            background: linear-gradient(135deg, #0f4c3a 0%, #2d5d4f 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #newsletter h2 {
+            color: white;
+        }
+
+        #newsletter h2::after {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1em;
+        }
+
+        .newsletter-form button {
+            padding: 15px 40px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: #c62828;
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        #about {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid #4a7c59;
+        }
+
+        .author-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2d5d4f 0%, #4a7c59 100%);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .about-content p {
+            font-size: 1.2em;
+            line-height: 2;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .author-name {
+            font-size: 1.8em;
+            color: #0f4c3a;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Series Section */
+        #series {
+            background: white;
+        }
+
+        .series-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .series-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #4a7c59;
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #0f4c3a;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .feature-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Testimonials */
+        #testimonials {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #2d5d4f;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            color: #0f4c3a;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0f4c3a 0%, #1a3a2e 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        footer p {
+            opacity: 0.9;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #c8e6c9;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section h2 {
+                font-size: 2.2em;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .about-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Reese Briar</h1>
+            <p>Romance Author • Sweet Stories • Holiday Magic</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#books">Books</a></li>
+            <li><a href="#series">The Series</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-banner">
+        <div class="container">
+            <h2>🎄 Three Towns. Three Christmas Love Stories. One Magical Season. 🎄</h2>
+            <p>Escape into the Evergreen Hearts Series—where second chances bloom in the snow, love finds its way home, and Christmas miracles are just the beginning.</p>
+        </div>
+    </div>
+
+    <section id="books">
+        <div class="container">
+            <h2>The Evergreen Hearts Series</h2>
+            <p class="section-subtitle">Sweet Christmas romance novellas perfect for cozy winter reading</p>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-cover" style="position: relative;">
+                        <div>Your Book 1<br>Cover Here</div>
+                        <div class="book-number">1</div>
+                    </div>
+                    <h3>Christmas at Snowbell Ridge</h3>
+                    <p class="series-info">Book One of the Evergreen Hearts Series</p>
+                    <p>Photographer Lila Morgan escapes to Snowbell Ridge and falls for widowed Christmas tree farmer James Whitmore and his silent daughter Sophie. He's spent three years building walls around his heart. She's built her whole life on control. But when a snowstorm traps them together, they must decide: is safety worth more than love?</p>
+                    <a href="#" class="amazon-button">📚 Buy on Amazon</a>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-cover" style="position: relative;">
+                        <div>Your Book 2<br>Cover Here</div>
+                        <div class="book-number">2</div>
+                    </div>
+                    <h3>Christmas at Hollybrook</h3>
+                    <p class="series-info">Book Two of the Evergreen Hearts Series</p>
+                    <p>Former lawyer Maya James buys a failing bed-and-breakfast and finds unexpected love with architect Noah Bennett as they fight to save her inn. When a developer threatens to destroy her dream, Noah must choose between protecting his heart and fighting for their future together.</p>
+                    <a href="#" class="amazon-button">📚 Buy on Amazon</a>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-cover" style="position: relative;">
+                        <div>Your Book 3<br>Cover Here</div>
+                        <div class="book-number">3</div>
+                    </div>
+                    <h3>Christmas in Pine Haven</h3>
+                    <p class="series-info">Book Three of the Evergreen Hearts Series</p>
+                    <p>Art teacher Rachel Winters never wanted children—until she falls for country singer Ethan Price and his ten-year-old nephew Cole. As Christmas approaches and Cole begins to heal, Rachel discovers that love doesn't follow a plan—it creates its own beautiful story.</p>
+                    <a href="#" class="amazon-button">📚 Buy on Amazon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="series">
+        <div class="container">
+            <h2>About The Evergreen Hearts Series</h2>
+            <p class="section-subtitle">Heartwarming Christmas romance with a touch of Vermont magic</p>
+            <div class="series-content">
+                <div class="series-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏔️</div>
+                        <h3>Small Town Magic</h3>
+                        <p>Three charming Vermont towns where everyone knows your name and Christmas spirit fills the air.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💚</div>
+                        <h3>Second Chances</h3>
+                        <p>Stories of healing, hope, and finding love when you least expect it—but need it most.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎄</div>
+                        <h3>Holiday Romance</h3>
+                        <p>Sweet, clean Christmas love stories perfect for curling up with cocoa by the fire.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                        <h3>Found Family</h3>
+                        <p>Heartwarming tales of building families from love, not just blood.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📖</div>
+                        <h3>Quick Reads</h3>
+                        <p>Each novella is the perfect length for an afternoon of cozy escape.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✨</div>
+                        <h3>Happily Ever After</h3>
+                        <p>Guaranteed happy endings that will warm your heart all season long.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Reese Briar</h2>
+            <p class="section-subtitle">Stories written with heart, hope, and a love for happily ever afters</p>
+            <div class="about-content">
+                <div class="author-image">RB</div>
+                <p class="author-name">Welcome to My World of Romance!</p>
+                <p>Reese Briar has been writing stories since childhood and discovered that romance is where the heart truly lives. When not crafting tales of love and second chances, Reese can be found with a good book and a warm cup of coffee, dreaming up the next happily ever after.</p>
+                <p><em>The Evergreen Hearts Series</em> marks Reese's debut into publishing, bringing you sweet romance filled with holiday magic, found family, and the belief that it's never too late for a happily ever after.</p>
+                <p>Whether you're a longtime romance reader or new to the genre, these Christmas novellas are written to warm your heart and remind you that love—in all its forms—is the greatest gift of all.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="newsletter">
+        <div class="container">
+            <h2>Join the Evergreen Hearts Newsletter</h2>
+            <div class="newsletter-content">
+                <p>Be the first to know about new releases, exclusive content, and special holiday promotions!</p>
+                <p>Plus, subscribers get a FREE bonus epilogue featuring all three couples celebrating their first Christmas together.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button>Subscribe</button>
+                </div>
+                <p style="font-size: 0.9em; margin-top: 20px; opacity: 0.8;">Your privacy matters. Unsubscribe anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <h2>What Readers Are Saying</h2>
+            <p class="section-subtitle">Early reviews from our advance reader team</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p>"The perfect Christmas escape! Lila and James's story had me crying happy tears. I couldn't put it down!"</p>
+                    <p class="testimonial-author">— Sarah M., ⭐⭐⭐⭐⭐</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"I loved Maya's journey from corporate lawyer to small-town innkeeper. Noah was the perfect book boyfriend. Can't wait for the next one!"</p>
+                    <p class="testimonial-author">— Jennifer K., ⭐⭐⭐⭐⭐</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Rachel and Ethan's story touched my heart in ways I didn't expect. This series is pure holiday magic wrapped in romance."</p>
+                    <p class="testimonial-author">— Amanda L., ⭐⭐⭐⭐⭐</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="font-size: 1.3em; margin-bottom: 20px;">🎄 Reese Briar 🎄</p>
+            <p>Sweet Romance • Holiday Magic • Happily Ever Afters</p>
+            <div class="footer-links">
+                <a href="#books">Books</a>
+                <a href="#series">Series</a>
+                <a href="#about">About</a>
+                <a href="#newsletter">Newsletter</a>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.9em;">&copy; 2024 Reese Briar. All rights reserved.</p>
+            <p style="font-size: 0.9em;">Made with 💚 and Christmas magic</p>
+        </div>
+    </footer>
+</body>
+</html>
